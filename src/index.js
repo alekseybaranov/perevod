@@ -1,3 +1,10 @@
+import 'react-app-polyfill/ie11'
+// Подключение react-app-polyfill
+// для поддержки IE11 или IE9
+// Строка импорта должна быть первой в файле
+//import 'react-app-polyfill/ie9'
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
