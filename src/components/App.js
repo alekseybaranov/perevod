@@ -6,9 +6,29 @@ import { changeFirstName,
          changeSecondName } from '../store/actions'
 
 class App extends React.Component{
+
+
+  componentDidMount() {
+    fetch('/users')
+      .then(res => res.json())
+      .then(users => this.setState({ users }));
+  }
+
+
+
   render() {
-    const { firstName, secondName, 
+    const { firstName, secondName, users,
             changeFirstName, changeSecondName } = this.props
+
+    console.log(`this.props.users: ${this.props.users}`)
+    console.log(`this.props.firstName: ${this.props.firstName}`)
+    
+    console.log(`firstName: ${firstName}`)
+    console.log(`users: ${users}`)
+
+    
+    
+
     return (
       <div>
         <div>
@@ -32,17 +52,30 @@ class App extends React.Component{
         <div>
           {`${firstName} ${secondName}`}
         </div>
+
+        <div className="App">
+          <h1>Users</h1>
+          {users.map(user =>
+            <div key={user.id}>{user.username}</div>
+          )}
+        </div>
+
       </div>
     )
   }
 }
 
-// функция выдёргивает из state-а поля, и добавляет их в props
+// функция добавляет их в props все поля из state
 const putStateToProps = (state) => {
+  /*
   return {
     firstName: state.firstName,
-    secondName: state.secondName
+    secondName: state.secondName,
+    users: state.users
   }
+  */
+
+  return {...state}
 }
 
 
